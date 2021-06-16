@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CategoryView">
+        <attr name="categoryName" format="string" />
+        <attr name="categoryTextSize" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="ScoreView">
+        <attr name="percentage" format="float" />
+    </declare-styleable>
+</resources>
