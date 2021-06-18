@@ -1,5 +1,6 @@
 package com.kishore.tmdbapp.ui.dashboard.fragment
 
+import android.graphics.Movie
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,16 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.kishore.tmdbapp.R
 import com.kishore.tmdbapp.data.model.setPosterWith
-import com.kishore.tmdbapp.data.network.ApiService
 import com.kishore.tmdbapp.data.repository.TmdbRepository
 import com.kishore.tmdbapp.databinding.FragmentDashBoardBinding
 import com.kishore.tmdbapp.ui.base.BaseActivity
-import com.kishore.tmdbapp.ui.dashboard.DashBoardViewModel
+import com.kishore.tmdbapp.ui.dashboard.adapter.IMovieItemClickListener
+import com.kishore.tmdbapp.ui.dashboard.viewmodel.DashBoardViewModel
 import com.kishore.tmdbapp.ui.dashboard.adapter.MovieListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -28,8 +29,16 @@ class DashBoardFragment : Fragment() {
     private val mTAG = DashBoardFragment::class.java.simpleName
     private var binding: FragmentDashBoardBinding? = null
     private val viewModel: DashBoardViewModel by activityViewModels()
-    var popularMoviesListAdapter: MovieListAdapter = MovieListAdapter()
-    var topMoviesListAdapter: MovieListAdapter = MovieListAdapter()
+    private var onMovieItemClickListener = object : IMovieItemClickListener {
+        override fun onMovieItemClicked(movie: com.kishore.tmdbapp.data.model.Movie) {
+            val action =
+                DashBoardFragmentDirections.actionDashBoardFragmentToViewDetailsFragment(movie)
+            findNavController().navigate(action)
+        }
+    }
+    var popularMoviesListAdapter: MovieListAdapter = MovieListAdapter(onMovieItemClickListener)
+    var topMoviesListAdapter: MovieListAdapter = MovieListAdapter(onMovieItemClickListener)
+
     @Inject
     lateinit var repo: TmdbRepository
     val configuration by lazy {
@@ -47,7 +56,10 @@ class DashBoardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as BaseActivity).setToolbarTitle("TMDB App")
+        (requireActivity() as BaseActivity).apply {
+            setSupportActionBar(binding?.toolbarMainInclude?.toolbarMain)
+            setToolbarTitle("TMDB App")
+        }
         viewModel.dashBoardData.observe(requireActivity(), {
             it?.let {
                 it.popularMovies?.movies?.map { movie ->
@@ -102,6 +114,7 @@ class DashBoardFragment : Fragment() {
         }
 
         viewModel.fetchDashBoardData()
+        viewModel.fetchRouteResponse()
     }
 
     var onClickListener = View.OnClickListener { view ->
@@ -112,6 +125,7 @@ class DashBoardFragment : Fragment() {
             it.findNavController().navigate(action)
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

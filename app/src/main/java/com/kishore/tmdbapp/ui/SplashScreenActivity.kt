@@ -1,14 +1,12 @@
-package com.kishore.tmdbapp.ui.dashboard
+package com.kishore.tmdbapp.ui
 
-import android.animation.AnimatorInflater
-import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import com.kishore.tmdbapp.R
 import com.kishore.tmdbapp.databinding.ActivitySplashScreenBinding
+import com.kishore.tmdbapp.ui.dashboard.DashBoardActivity
 import kotlinx.serialization.ExperimentalSerializationApi
 
 @ExperimentalSerializationApi

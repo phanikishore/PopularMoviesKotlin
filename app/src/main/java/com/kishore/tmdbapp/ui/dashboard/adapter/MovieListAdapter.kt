@@ -13,7 +13,8 @@ import com.kishore.tmdbapp.utils.STANDARD_DATE_FORMAT
 import com.kishore.tmdbapp.utils.loadUrl
 import com.kishore.tmdbapp.utils.toStringFormatted
 
-class MovieListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MovieListAdapter(val listener: IMovieItemClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val mTAG = MovieListAdapter::class.java.simpleName
     private var mMovieList = mutableListOf<Movie?>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -52,6 +53,15 @@ class MovieListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 binding.ivMoviePoster.loadUrl(it)
             }
             binding.userScoreView.setPercentage(movie.voteAverage ?: 0.0)
+            binding.root.setOnClickListener {
+                listener.onMovieItemClicked(movie)
+            }
         }
     }
+
+
+}
+
+interface IMovieItemClickListener {
+    fun onMovieItemClicked(movie: Movie)
 }

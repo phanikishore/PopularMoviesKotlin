@@ -4,7 +4,6 @@ import android.content.Context
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.kishore.tmdbapp.BuildConfig
 import com.kishore.tmdbapp.data.network.TmdbApi
-import com.kishore.tmdbapp.data.utils.ApiResponse
 import com.kishore.tmdbapp.utils.isNetworkAvailable
 import dagger.Module
 import dagger.Provides
@@ -13,8 +12,11 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
-import okhttp3.*
+import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Protocol
+import okhttp3.Response
 import okhttp3.ResponseBody.Companion.toResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

@@ -7,26 +7,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import com.kishore.tmdbapp.R
 import com.kishore.tmdbapp.data.model.setPosterWith
-import com.kishore.tmdbapp.data.network.ApiService
-import com.kishore.tmdbapp.data.repository.TmdbRepository
 import com.kishore.tmdbapp.databinding.FragmentViewMoreBinding
 import com.kishore.tmdbapp.ui.base.BaseActivity
-import com.kishore.tmdbapp.ui.dashboard.DashBoardViewModel
+import com.kishore.tmdbapp.ui.dashboard.adapter.IMovieItemClickListener
+import com.kishore.tmdbapp.ui.dashboard.viewmodel.DashBoardViewModel
 import com.kishore.tmdbapp.ui.dashboard.adapter.MovieListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.ExperimentalSerializationApi
-import javax.inject.Inject
 
 @ExperimentalSerializationApi
 @AndroidEntryPoint
 class ViewMoreFragment : Fragment() {
     val mTAG = ViewMoreFragment::class.java.simpleName
     var binding: FragmentViewMoreBinding? = null
-    val viewModeAdapter by lazy { MovieListAdapter() }
+    private var onMovieItemClickListener = object : IMovieItemClickListener {
+        override fun onMovieItemClicked(movie: com.kishore.tmdbapp.data.model.Movie) {
+            findNavController().navigate(R.id.action_viewMoreFragment_to_viewDetailsFragment)
+        }
+    }
+    val viewModeAdapter by lazy { MovieListAdapter(onMovieItemClickListener) }
     val viewModel: DashBoardViewModel by activityViewModels()
     val args: ViewMoreFragmentArgs by navArgs()
     val configuration by lazy {
@@ -49,6 +53,10 @@ class ViewMoreFragment : Fragment() {
                 layoutManager = GridLayoutManager(requireContext(), 3)
                 adapter = viewModeAdapter
             }
+        }
+        (requireActivity() as BaseActivity).apply {
+            setSupportActionBar(binding?.toolbar?.toolbarMain)
+            setToolbarTitle(args.categoryType)
         }
         Log.d(mTAG, args.categoryType)
         (requireActivity() as BaseActivity).setToolbarTitle(args.categoryType)

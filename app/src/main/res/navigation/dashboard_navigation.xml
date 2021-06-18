@@ -21,7 +21,10 @@
         android:id="@+id/viewDetailsFragment"
         android:name="com.kishore.tmdbapp.ui.dashboard.fragment.MovieDetailsFragment"
         android:label="fragment_view_details"
-        tools:layout="@layout/fragment_view_details" >
+        tools:layout="@layout/fragment_view_details">
+        <argument
+            android:name="movie"
+            app:argType="com.kishore.tmdbapp.data.model.Movie" />
     </fragment>
     <fragment
         android:id="@+id/viewMoreFragment"

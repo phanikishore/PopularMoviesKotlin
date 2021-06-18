@@ -4,8 +4,10 @@ import android.util.Log
 import com.kishore.tmdbapp.data.model.Configuration
 import com.kishore.tmdbapp.data.model.DashBoardResponse
 import com.kishore.tmdbapp.data.model.MoviesResponse
+import com.kishore.tmdbapp.data.model.RouteResponse
 import com.kishore.tmdbapp.data.network.ApiService
 import com.kishore.tmdbapp.data.network.TmdbApi
+import com.kishore.tmdbapp.data.utils.ApiResponse
 import kotlinx.coroutines.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import retrofit2.HttpException
@@ -62,5 +64,9 @@ class TmdbRepository @Inject constructor(private var apiService: TmdbApi?) {
 
     suspend fun fetchPopularTvShows(pageNo: Int):MoviesResponse?{
         return apiService?.getTvPopularShows(pageNo)
+    }
+
+    suspend fun fetchRouteResponse():ApiResponse<RouteResponse?>{
+        return ApiResponse.Success<RouteResponse>(apiService?.getRouteResponse() as RouteResponse)
     }
 }
