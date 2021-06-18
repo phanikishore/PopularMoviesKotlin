@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/dashBoardFragment"
-        android:name="com.kishore.tmdbapp.ui.dashboard.fragment.DashBoardFragment"
+        android:name="com.barun.bankopen.ui.dashboard.fragment.DashBoardFragment"
         android:label="fragment_dash_board"
         tools:layout="@layout/fragment_dash_board">
         <action
@@ -19,13 +19,13 @@
     </fragment>
     <fragment
         android:id="@+id/viewDetailsFragment"
-        android:name="com.kishore.tmdbapp.ui.dashboard.fragment.MovieDetailsFragment"
+        android:name="com.barun.bankopen.ui.dashboard.fragment.MovieDetailsFragment"
         android:label="fragment_view_details"
         tools:layout="@layout/fragment_view_details" >
     </fragment>
     <fragment
         android:id="@+id/viewMoreFragment"
-        android:name="com.kishore.tmdbapp.ui.dashboard.fragment.ViewMoreFragment"
+        android:name="com.barun.bankopen.ui.dashboard.fragment.ViewMoreFragment"
         android:label="fragment_view_more"
         tools:layout="@layout/fragment_view_more">
         <argument
