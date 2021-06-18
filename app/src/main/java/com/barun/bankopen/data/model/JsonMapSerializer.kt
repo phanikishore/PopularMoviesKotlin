@@ -18,9 +18,11 @@ object JsonMapSerializer : KSerializer<Map<String, List<RouteTiming>>> {
         MapSerializer(String.serializer(), ListSerializer(RouteTiming.serializer()))
     override val descriptor: SerialDescriptor
         get() = mapSerializer.descriptor
+
     override fun deserialize(decoder: Decoder): Map<String, List<RouteTiming>> {
         return mapSerializer.deserialize(decoder)
     }
+
     override fun serialize(encoder: Encoder, value: Map<String, List<RouteTiming>>) {
         return mapSerializer.serialize(encoder, value)
     }

@@ -1,9 +1,8 @@
 package com.barun.bankopen.data.model
 
-import androidx.room.Entity
-import androidx.room.ForeignKey
-import androidx.room.TypeConverters
+import androidx.room.*
 import com.barun.bankopen.data.persistance.RouteTimingConverter
+import java.sql.RowId
 
 @Entity(
     foreignKeys = [ForeignKey(
@@ -15,6 +14,9 @@ import com.barun.bankopen.data.persistance.RouteTimingConverter
 )
 @TypeConverters(RouteTimingConverter::class)
 class RouteTimingDB(
+    @ColumnInfo(index = true)
     val id: String,
-    val listTimings: List<RouteTiming>
+    val listTimings: List<RouteTiming>,
+    @PrimaryKey(autoGenerate = true)
+    val rowId: Int=0
 )

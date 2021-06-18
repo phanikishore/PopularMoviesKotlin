@@ -24,12 +24,13 @@ class RouteSyncWorker @AssistedInject constructor(
 
     override suspend fun doWork(): Result {
         Log.d(TAG, "1 Thread${Thread.currentThread().name}")
-        openBankRepository.fetchRoute().catch {
+        openBankRepository.fetchRouteFromNetwork().catch {
         }.collect { routeResponse->
             val routeInfo = routeResponse?.routeInfo
             val routeTiming = routeResponse?.routeTimings
             Log.d(TAG, "collected data routeInfo:$routeInfo")
             Log.d(TAG, "collected data routeTiming:${routeTiming?.get("r003")}")
+            openBankRepository.persistRouteData(routeResponse)
         }
         return Result.success()
     }
