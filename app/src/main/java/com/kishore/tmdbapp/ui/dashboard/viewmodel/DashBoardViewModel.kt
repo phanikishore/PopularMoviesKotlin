@@ -1,4 +1,4 @@
-package com.kishore.tmdbapp.ui.dashboard
+package com.kishore.tmdbapp.ui.dashboard.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -64,6 +64,14 @@ class DashBoardViewModel @Inject constructor(val repository: TmdbRepository) : V
         viewModelScope.launch {
             repository.fetchUpComingMovies(pageNo).let {
                 popularMovies.value = it
+            }
+        }
+    }
+
+    fun fetchRouteResponse() {
+        viewModelScope.launch {
+            repository.fetchRouteResponse().let {
+                println(it.toString())
             }
         }
     }

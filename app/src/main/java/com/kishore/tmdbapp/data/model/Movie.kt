@@ -1,9 +1,12 @@
 package com.kishore.tmdbapp.data.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Transient
 
+@Parcelize
 @Serializable
 data class Movie(
     var adult: Boolean? = null,
@@ -29,7 +32,7 @@ data class Movie(
     @SerialName("vote_count")
     var voteCount: Int? = null
 
-) {
+) : Parcelable {
 
     @Transient
     var posterUrl: String? = null

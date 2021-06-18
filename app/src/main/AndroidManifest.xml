@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TMDBApp"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.dashboard.SplashScreenActivity">
+        <activity android:name=".ui.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
