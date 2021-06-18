@@ -3,6 +3,7 @@ package com.barun.bankopen.di
 import android.content.Context
 import androidx.room.Room
 import com.barun.bankopen.BuildConfig
+import com.barun.bankopen.data.persistance.RouteDBRepo
 import com.barun.bankopen.data.persistance.RouteDatabase
 import com.barun.bankopen.data.repository.OpenBankApi
 import com.barun.bankopen.data.repository.OpenBankRepository
@@ -23,14 +24,14 @@ import javax.inject.Singleton
 @ExperimentalSerializationApi
 @Module
 @InstallIn(SingletonComponent::class)
-object DataModule {
+object ApiModule {
 
     private val mediaType = "application/json".toMediaType()
 
     @Provides
     @Singleton
-    fun provideTmdbRepo(apiService: OpenBankApi): OpenBankRepository {
-        return OpenBankRepository(apiService)
+    fun provideRepo(apiService: OpenBankApi, database: RouteDBRepo): OpenBankRepository {
+        return OpenBankRepository(apiService, database)
     }
 
     @Provides
