@@ -11,25 +11,17 @@
         android:layout_height="match_parent"
         tools:context=".ui.dashboard.fragment.DashBoardFragment">
 
-        <com.kishore.tmdbapp.ui.widget.CategoryView
-            android:id="@+id/popularMovies"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            app:categoryName="Popular Movies"
-            app:categoryTextSize="8sp"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/routeList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <com.kishore.tmdbapp.ui.widget.CategoryView
-            android:id="@+id/topMovies"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            app:categoryName="Top Rated"
-            app:categoryTextSize="8sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/popularMovies" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
