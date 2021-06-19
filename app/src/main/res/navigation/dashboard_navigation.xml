@@ -10,29 +10,6 @@
         android:name="com.barun.bankopen.ui.dashboard.fragment.DashBoardFragment"
         android:label="fragment_dash_board"
         tools:layout="@layout/fragment_dash_board">
-        <action
-            android:id="@+id/action_dashBoardFragment_to_viewDetailsFragment"
-            app:destination="@id/viewDetailsFragment" />
-        <action
-            android:id="@+id/action_dashBoardFragment_to_viewMoreFragment"
-            app:destination="@id/viewMoreFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/viewDetailsFragment"
-        android:name="com.barun.bankopen.ui.dashboard.fragment.MovieDetailsFragment"
-        android:label="fragment_view_details"
-        tools:layout="@layout/fragment_view_details" >
-    </fragment>
-    <fragment
-        android:id="@+id/viewMoreFragment"
-        android:name="com.barun.bankopen.ui.dashboard.fragment.ViewMoreFragment"
-        android:label="fragment_view_more"
-        tools:layout="@layout/fragment_view_more">
-        <argument
-            android:name="categoryType"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_viewMoreFragment_to_viewDetailsFragment"
-            app:destination="@id/viewDetailsFragment" />
-    </fragment>
+
 </navigation>
