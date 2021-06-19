@@ -12,8 +12,11 @@ import com.barun.bankopen.databinding.FragmentDashBoardBinding
 import com.barun.bankopen.ui.base.BaseActivity
 import com.barun.bankopen.ui.dashboard.DashBoardViewModel
 import com.barun.bankopen.ui.dashboard.adapter.RouteListAdapter
+import com.barun.bankopen.utils.convertToMinutes
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.ExperimentalSerializationApi
+import java.text.SimpleDateFormat
+import java.util.*
 
 @ExperimentalSerializationApi
 @AndroidEntryPoint
@@ -33,8 +36,9 @@ class DashBoardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (requireActivity() as BaseActivity).setToolbarTitle("OpenBank")
-        viewModel.fetchRouteInfo((System.currentTimeMillis() / 60000).toInt())
+        val sdf = SimpleDateFormat("HH:mm", Locale.ENGLISH)
+        val currentTime: String = sdf.format(Date())
+        viewModel.fetchRouteInfo((currentTime.convertToMinutes()))
         binding?.routeList?.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding?.routeList?.adapter = adapter

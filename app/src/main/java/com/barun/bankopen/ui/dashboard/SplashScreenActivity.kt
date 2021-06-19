@@ -22,6 +22,6 @@ class SplashScreenActivity : AppCompatActivity() {
         handler.postDelayed({
             startActivity(Intent(this, DashBoardActivity::class.java))
             finish()
-        }, 5000)
+        }, 1000)
     }
 }

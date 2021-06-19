@@ -1,9 +1,7 @@
 package com.barun.bankopen.data.persistance
 
 import androidx.room.*
-import com.barun.bankopen.data.model.RouteTiming
 import com.barun.bankopen.data.model.RouteTimingDB
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RouteTimingDao {
@@ -12,5 +10,8 @@ interface RouteTimingDao {
 
     @Transaction
     @Query("SELECT * FROM RouteTimingDB WHERE id = :routeId")
-    fun fetchRouteTimings(routeId: String):Flow<RouteTimingDB>
+    fun fetchRouteTimings(routeId: String): RouteTimingDB
+
+    @Query("SELECT * FROM RouteTimingDB")
+    fun fetchAllRouteTimings(): List<RouteTimingDB>
 }
