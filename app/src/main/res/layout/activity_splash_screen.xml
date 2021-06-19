@@ -8,10 +8,11 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/splashImage"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:scaleType="fitXY"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_primary_full"
+        android:src="@drawable/bustracker"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
