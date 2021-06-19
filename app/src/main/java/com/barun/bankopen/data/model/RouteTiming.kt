@@ -8,6 +8,6 @@ data class RouteTiming(
     val avaiable: Int,
     val totalSeats: Int,
     val tripStartTime: String,
-    @Transient
-    var tripStartTimeInMins: Int = 0
+    /*@Transient
+    var tripStartTimeInMins: Int = 0*/
 )

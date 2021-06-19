@@ -19,7 +19,6 @@ import javax.inject.Inject
 class DashBoardViewModel @Inject constructor(val repository: OpenBankRepository) : ViewModel() {
 
     private val TAG = DashBoardViewModel::class.java.simpleName
-    private var map = hashMapOf<String, List<RouteTiming>?>()
     var routeInfoLiveData: MutableLiveData<RouteResponse> = MutableLiveData()
 
 

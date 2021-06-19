@@ -38,39 +38,17 @@ class OpenBankRepository @Inject constructor(
     }
 
     suspend fun fetchRoutesFromDB(currentTime: Int): Flow<RouteResponse?> {
-        /*val value = CoroutineScope(Dispatchers.Main).async {
-            val map = hashMapOf<String, List<RouteTiming>>()
-            Log.d(TAG, "Before fetchRoutesFromDB:${Thread.currentThread().name}")
-            val routeResponse = RouteResponse()
-            dbService.routeInfoDao.fetchRoutes().observeForever { listRouteInfo ->
-                val listRouteTimings = dbService.routeTimingDao.fetchAllRouteTimings()
-                routeResponse.apply {
-                    routeInfo = listRouteInfo
-                }
-                listRouteTimings.forEach { routeTimingDb ->
-                    routeTimingDb.listTimings.filter {
-                        it.tripStartTime.convertToMinutes() >= 900
-                    }.also { futureRouteTiming ->
-                        map[routeTimingDb.id] = futureRouteTiming
-                    }
-                }
-            }
-            routeResponse.apply {
-                routeTimings = map
-            }
-        }
-        return value.await()*/
         return flow {
             val routeResponse = RouteResponse()
             val map = hashMapOf<String, List<RouteTiming>>()
             val listRouteInfoFlow = dbService.routeInfoDao.fetchRoutes()
-            listRouteInfoFlow.collect { routeInfoList->
+            listRouteInfoFlow.collect { routeInfoList ->
                 emit(routeResponse.apply {
                     routeInfo = routeInfoList
                     val listRouteTimings = dbService.routeTimingDao.fetchAllRouteTimings()
                     listRouteTimings.forEach { routeTimingDb ->
                         routeTimingDb.listTimings.filter {
-                            it.tripStartTime.convertToMinutes() >= 900
+                            it.tripStartTime.convertToMinutes() >= currentTime
                         }.also { futureRouteTiming ->
                             map[routeTimingDb.id] = futureRouteTiming
                         }

@@ -98,10 +98,10 @@ fun Long.toFormattedString(format: String): String? {
 
 /***
  * 24Hrs String convert to Long
- * Eg: 16:25 to Long Conversion
+ * Eg: 16:25 to Int Conversion
  *
  */
-fun String.convertToMinutes():Int{
+fun String.convertToMinutes(): Int {
     val list = this.split(":")
-    return list[0].toInt()*60 + list[1].toInt()
+    return ((list[0].toInt() * 60) + list[1].toInt())
 }

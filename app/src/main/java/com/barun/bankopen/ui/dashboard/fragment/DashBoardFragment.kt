@@ -44,7 +44,7 @@ class DashBoardFragment : Fragment() {
         binding?.routeList?.adapter = adapter
         viewModel.routeInfoLiveData.observe(viewLifecycleOwner, { routeResponse ->
             Log.d(TAG, "Resposnse in DashBoardFragment::$routeResponse")
-            adapter.addItems(routeResponse)
+            adapter.addItems(routeResponse,currentTime.convertToMinutes())
         })
     }
 
