@@ -2,8 +2,10 @@ package com.barun.bankopen.data.model
 
 import androidx.room.*
 import com.barun.bankopen.data.persistance.RouteTimingConverter
-import java.sql.RowId
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
+@Serializable
 @Entity(
     foreignKeys = [ForeignKey(
         entity = RouteInfo::class,
@@ -18,5 +20,6 @@ class RouteTimingDB(
     val id: String,
     val listTimings: List<RouteTiming>,
     @PrimaryKey(autoGenerate = true)
-    val rowId: Int=0
+    @Transient
+    val rowId: Int = 0
 )
