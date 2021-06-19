@@ -5,11 +5,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.barun.bankopen.databinding.FragmentDashBoardBinding
-import com.barun.bankopen.ui.base.BaseActivity
 import com.barun.bankopen.ui.dashboard.DashBoardViewModel
 import com.barun.bankopen.ui.dashboard.adapter.RouteListAdapter
 import com.barun.bankopen.utils.convertToMinutes
@@ -44,7 +45,16 @@ class DashBoardFragment : Fragment() {
         binding?.routeList?.adapter = adapter
         viewModel.routeInfoLiveData.observe(viewLifecycleOwner, { routeResponse ->
             Log.d(TAG, "Resposnse in DashBoardFragment::$routeResponse")
-            adapter.addItems(routeResponse,currentTime.convertToMinutes())
+            binding?.progressBarDashBoard?.isVisible = false
+            val routeList = routeResponse.routeInfo
+            val routeTimmingmap = routeResponse.routeTimings
+            routeList?.iterator()?.forEachRemaining {
+                if(routeTimmingmap?.get(it.id)?.isEmpty() == true){
+
+                }
+            }
+            adapter.addItems(routeResponse, currentTime.convertToMinutes())
+
         })
     }
 

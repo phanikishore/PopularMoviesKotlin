@@ -52,20 +52,22 @@ class RouteListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             if (routeTiming?.isEmpty() != true) {
                 item.textViewStartTime.text = routeTiming?.get(0)?.tripStartTime
                 val departInMin =
-                    routeTiming?.get(0)?.tripStartTime?.convertToMinutes()!! - deviceCurrentTime
-                val timeInPair = Pair(departInMin / 60, departInMin % 60)
+                    routeTiming?.get(0)?.tripStartTime?.convertToMinutes()?.let {
+                        it - deviceCurrentTime
+                    }
+                val timeInPair = Pair(departInMin?.div(60), departInMin?.rem(60))
                 "${timeInPair.first}hr${timeInPair.second}min".also {
                     item.departureInTextview.text = it
                 }
                 if (routeInfo.tripDuration.contains("hrs")) {
                     val time = routeInfo.tripDuration.dropLast(3)
-                    val tripStartTimeMin = routeTiming[0].tripStartTime.convertToMinutes()
-                    setArrivalTimeData(time.toInt()*60,tripStartTimeMin)
+                    val tripStartTimeMin = routeTiming?.get(0)?.tripStartTime?.convertToMinutes()
+                    tripStartTimeMin?.let { setArrivalTimeData(time.toInt()*60, it) }
                 }
                 if (routeInfo.tripDuration.contains(" min")) {
                     val time = routeInfo.tripDuration.dropLast(3)
-                    val tripStartTimeMin = routeTiming[0].tripStartTime.convertToMinutes()
-                    setArrivalTimeData(time.trim().toInt(),tripStartTimeMin)
+                    val tripStartTimeMin = routeTiming?.get(0)?.tripStartTime?.convertToMinutes()
+                    tripStartTimeMin?.let { setArrivalTimeData(time.trim().toInt(), it) }
                 }
             }
         }
