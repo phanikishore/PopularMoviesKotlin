@@ -9,6 +9,7 @@ import com.barun.bankopen.data.persistance.RouteDBRepo
 import com.barun.bankopen.utils.convertToMinutes
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
@@ -43,6 +44,7 @@ class OpenBankRepository @Inject constructor(
             val map = hashMapOf<String, List<RouteTiming>>()
             val listRouteInfoFlow = dbService.routeInfoDao.fetchRoutes()
             listRouteInfoFlow.collect { routeInfoList ->
+                delay(100)
                 emit(routeResponse.apply {
                     routeInfo = routeInfoList
                     val listRouteTimings = dbService.routeTimingDao.fetchAllRouteTimings()

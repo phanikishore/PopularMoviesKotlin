@@ -8,6 +8,7 @@ import androidx.work.WorkerParameters
 import com.barun.bankopen.data.repository.OpenBankRepository
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.serialization.ExperimentalSerializationApi
