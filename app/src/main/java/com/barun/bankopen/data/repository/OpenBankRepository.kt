@@ -15,6 +15,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.serialization.ExperimentalSerializationApi
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @ExperimentalSerializationApi
@@ -38,19 +40,21 @@ class OpenBankRepository @Inject constructor(
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun fetchRoutesFromDB(currentTime: Int): Flow<RouteResponse?> {
+    suspend fun fetchRoutesFromDB(): Flow<RouteResponse?> {
         return flow {
             val routeResponse = RouteResponse()
             val map = hashMapOf<String, List<RouteTiming>>()
             val listRouteTimingsFlow = dbService.routeTimingDao.fetchAllRouteTimingsAsFlow()
             listRouteTimingsFlow.collect { routeTimings ->
                 delay(1000)
+                val sdf = SimpleDateFormat("HH:mm", Locale.ENGLISH)
+                val currentTime = sdf.format(Date()).convertToMinutes()
                 emit(routeResponse.apply {
                     this.routeInfo = mutableListOf()
                     routeTimings.forEach { routeTimingDb ->
                         //Perform RouteTiming filter based on currentTime
                         routeTimingDb.listTimings.filter {
-                            it.tripStartTime.convertToMinutes() >= currentTime
+                            it.tripStartTime.convertToMinutes() > currentTime
                         }.also { futureRouteTiming ->
                             if (futureRouteTiming.isNotEmpty()) {
                                 //Perform Sorting for all the RouteTimings on Individual RouteInfo Id

@@ -26,7 +26,7 @@ class DashBoardViewModel @Inject constructor(val repository: OpenBankRepository)
         Log.d(TAG, "timeInMins:$timeInMins")
         viewModelScope.launch {
             Log.d(TAG, "1 fetchRouteInfo:${Thread.currentThread().name}")
-            val response = repository.fetchRoutesFromDB(timeInMins)
+            val response = repository.fetchRoutesFromDB()
             response.collect {
                 routeInfoLiveData.value = it
                 Log.d(TAG, "2 fetchRouteInfo:${Thread.currentThread().name}")
