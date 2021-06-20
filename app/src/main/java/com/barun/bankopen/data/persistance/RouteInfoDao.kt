@@ -2,7 +2,6 @@ package com.barun.bankopen.data.persistance
 
 import androidx.room.*
 import com.barun.bankopen.data.model.RouteInfo
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RouteInfoDao {
@@ -11,6 +10,6 @@ interface RouteInfoDao {
     fun insert(vararg routeInfo: RouteInfo)
 
     @Transaction
-    @Query("SELECT * FROM RouteInfo")
-    fun fetchRoutes(): Flow<List<RouteInfo>>
+    @Query("SELECT * FROM RouteInfo WHERE id = :id")
+    fun fetchRouteInfo(id:String): RouteInfo
 }

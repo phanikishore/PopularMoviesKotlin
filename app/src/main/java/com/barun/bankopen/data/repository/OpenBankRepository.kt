@@ -42,20 +42,40 @@ class OpenBankRepository @Inject constructor(
         return flow {
             val routeResponse = RouteResponse()
             val map = hashMapOf<String, List<RouteTiming>>()
-            val listRouteInfoFlow = dbService.routeInfoDao.fetchRoutes()
-            listRouteInfoFlow.collect { routeInfoList ->
-                delay(100)
+            val listRouteTimingsFlow = dbService.routeTimingDao.fetchAllRouteTimingsAsFlow()
+            listRouteTimingsFlow.collect { routeTimings ->
+                delay(1000)
                 emit(routeResponse.apply {
-                    routeInfo = routeInfoList
-                    val listRouteTimings = dbService.routeTimingDao.fetchAllRouteTimings()
-                    listRouteTimings.forEach { routeTimingDb ->
+                    this.routeInfo = mutableListOf()
+                    routeTimings.forEach { routeTimingDb ->
+                        //Perform RouteTiming filter based on currentTime
                         routeTimingDb.listTimings.filter {
                             it.tripStartTime.convertToMinutes() >= currentTime
                         }.also { futureRouteTiming ->
-                            map[routeTimingDb.id] = futureRouteTiming
+                            if (futureRouteTiming.isNotEmpty()) {
+                                //Perform Sorting for all the RouteTimings on Individual RouteInfo Id
+                                futureRouteTiming.sortedBy { it.tripStartTime.convertToMinutes() }
+                                    .also {
+                                        //Collect into a map with routeId as Key and RouteTiming as Value
+                                        map[routeTimingDb.id] = it
+                                    }
+                            }
                         }
                     }
-                    routeTimings = map
+                    //Perform sorting order on keys with respect to trip start Time of RouteTiming.
+                    map.toList().sortedBy {
+                        it.second[0].tripStartTime.convertToMinutes()
+                    }.also { sortedListOfMap ->
+                        //Collect RouteInfo Object from Database based on sorted List of Map.
+                        sortedListOfMap.forEach { pair ->
+                            this.routeInfo?.add(
+                                dbService.routeInfoDao.fetchRouteInfo(
+                                    pair.first
+                                )
+                            )
+                        }
+                        this.routeTimings = sortedListOfMap.toMap()
+                    }
                 })
             }
         }.flowOn(Dispatchers.IO)

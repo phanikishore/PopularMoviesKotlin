@@ -119,7 +119,7 @@
             android:fontFamily="@font/candal"
             android:text="@string/defaultText"
             android:textAppearance="@style/TextAppearance.AppCompat.Widget.PopupMenu.Large"
-            android:textSize="28sp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/tripDurationTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/vertical"
