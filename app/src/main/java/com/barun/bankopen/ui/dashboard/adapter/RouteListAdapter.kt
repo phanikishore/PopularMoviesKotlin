@@ -76,7 +76,7 @@ class RouteListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             val timeInPair = Pair(departInMin?.div(60), departInMin?.rem(60))
             var durationInString = ""
             timeInPair.second?.let { minutes ->
-                if (minutes > 0) {
+                if (minutes >= 0) {
                     durationInString = "${timeInPair.second} min"
                 }
             }
