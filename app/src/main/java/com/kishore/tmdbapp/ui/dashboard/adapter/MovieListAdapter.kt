@@ -1,17 +1,14 @@
 package com.kishore.tmdbapp.ui.dashboard.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.kishore.tmdbapp.R
 import com.kishore.tmdbapp.data.model.Movie
+import com.kishore.tmdbapp.data.utils.Constants.THUMBNAIL_URL
 import com.kishore.tmdbapp.databinding.ItemMovieInfoBinding
-import com.kishore.tmdbapp.utils.DATE_FORMAT_MONTH_DAY_YEAR
-import com.kishore.tmdbapp.utils.STANDARD_DATE_FORMAT
-import com.kishore.tmdbapp.utils.loadUrl
-import com.kishore.tmdbapp.utils.toStringFormatted
+import com.kishore.tmdbapp.utils.*
 
 class MovieListAdapter(val listener: IMovieItemClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -48,9 +45,8 @@ class MovieListAdapter(val listener: IMovieItemClickListener) :
                     DATE_FORMAT_MONTH_DAY_YEAR
                 )
             } ?: kotlin.run { "NA" }
-            movie.posterUrl?.let {
-                Log.d(mTAG, "Movie: ${movie.title}, PosterUrl: ${movie.posterUrl}")
-                binding.ivMoviePoster.loadUrl(it)
+            movie.posterPath?.run {
+                binding.ivMoviePoster.loadUrl(this.prefixUrl(THUMBNAIL_URL))
             }
             binding.userScoreView.setPercentage(movie.voteAverage ?: 0.0)
             binding.root.setOnClickListener {

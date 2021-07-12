@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/dashboardMenu"
+        android:contentDescription="@string/string_dash_board"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:iconTint="@color/white"
+        android:title="@string/string_dash_board" />
+
+    <item
+        android:id="@+id/discoverMenu"
+        android:contentDescription="@string/string_discover"
+        android:icon="@drawable/ic_compass"
+        android:iconTint="@color/white"
+        android:title="@string/string_discover" />
+
+    <item
+        android:id="@+id/tvMenu" android:checked="true"
+        android:contentDescription="@string/string_tv_shows"
+        android:icon="@drawable/ic_tv_icon"
+        android:iconTint="@color/white"
+        android:title="@string/string_tv_shows" />
+
+    <item
+        android:id="@+id/watchListMenu"
+        android:contentDescription="@string/string_watchlist"
+        android:icon="@drawable/ic_watchlist"
+        android:iconTint="@color/white"
+        android:title="@string/string_watchlist" />
+
+    <item
+        android:id="@+id/profileMenu"
+        android:contentDescription="@string/string_profile"
+        android:icon="@drawable/ic_profile_user_icon"
+        android:iconTint="@color/white"
+        android:title="@string/string_profile" />
+
+</menu>

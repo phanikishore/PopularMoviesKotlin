@@ -2,7 +2,8 @@ package com.kishore.tmdbapp.data.network
 
 import com.kishore.tmdbapp.data.model.Configuration
 import com.kishore.tmdbapp.data.model.MoviesResponse
-import com.kishore.tmdbapp.data.model.RouteResponse
+import com.kishore.tmdbapp.data.utils.ApiResponse
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -26,7 +27,4 @@ interface TmdbApi {
 
     @GET("/tv/popular")
     suspend fun getTvPopularShows(@Query("page") pageNo: Int): MoviesResponse
-
-    @GET("https://open-app1.herokuapp.com/data")
-    suspend fun getRouteResponse():RouteResponse
 }

@@ -2,9 +2,8 @@ package com.kishore.tmdbapp.data.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
-import kotlinx.serialization.Transient
+import kotlinx.serialization.Serializable
 
 @Parcelize
 @Serializable
@@ -34,18 +33,8 @@ data class Movie(
 
 ) : Parcelable {
 
-    @Transient
-    var posterUrl: String? = null
-
     override fun toString(): String {
-        return "Movie(adult=$adult, backdropPath=$backdropPath, genreIds=$genreIds, id=$id, originalLanguage=$originalLanguage, originalTitle=$originalTitle, overview=$overview, popularity=$popularity, posterPath=$posterPath, releaseDate=$releaseDate, title=$title, video=$video, voteAverage=$voteAverage, voteCount=$voteCount, posterUrl=$posterUrl)"
+        return "Movie(adult=$adult, backdropPath=$backdropPath, genreIds=$genreIds, id=$id, originalLanguage=$originalLanguage, originalTitle=$originalTitle, overview=$overview, popularity=$popularity, posterPath=$posterPath, releaseDate=$releaseDate, title=$title, video=$video, voteAverage=$voteAverage, voteCount=$voteCount)"
     }
 
-}
-
-fun Movie.setPosterWith(uri: String, posterSize: String): Movie {
-    posterPath?.let {
-        this.posterUrl = String.format("%1s%2s%3s", uri, posterSize, this.posterPath)
-        return this
-    } ?: return this
 }

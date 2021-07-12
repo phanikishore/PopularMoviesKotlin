@@ -39,7 +39,7 @@ class ScoreView : View {
     private fun initView(attrs: AttributeSet? = null) {
         attrs?.let { attr ->
             context.theme.obtainStyledAttributes(attr, R.styleable.ScoreView, 0, 0).apply {
-                setPercentage(getFloatOrThrow(R.styleable.ScoreView_percentage).toDouble())
+                setPercentage(getFloat(R.styleable.ScoreView_percentage, 0f).toDouble())
             }
         }
     }

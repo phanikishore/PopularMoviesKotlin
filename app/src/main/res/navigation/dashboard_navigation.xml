@@ -3,39 +3,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dashboard_navigation"
-    app:startDestination="@id/dashBoardFragment">
+    app:startDestination="@id/dashboardMenu">
 
     <fragment
-        android:id="@+id/dashBoardFragment"
+        android:id="@+id/dashboardMenu"
         android:name="com.kishore.tmdbapp.ui.dashboard.fragment.DashBoardFragment"
-        android:label="fragment_dash_board"
-        tools:layout="@layout/fragment_dash_board">
-        <action
-            android:id="@+id/action_dashBoardFragment_to_viewDetailsFragment"
-            app:destination="@id/viewDetailsFragment" />
-        <action
-            android:id="@+id/action_dashBoardFragment_to_viewMoreFragment"
-            app:destination="@id/viewMoreFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_dash_board" />
     <fragment
-        android:id="@+id/viewDetailsFragment"
-        android:name="com.kishore.tmdbapp.ui.dashboard.fragment.MovieDetailsFragment"
-        android:label="fragment_view_details"
-        tools:layout="@layout/fragment_view_details">
-        <argument
-            android:name="movie"
-            app:argType="com.kishore.tmdbapp.data.model.Movie" />
-    </fragment>
+        android:id="@+id/discoverMenu"
+        android:name="com.kishore.tmdbapp.ui.dashboard.fragment.DiscoverFragment"
+        tools:layout="@layout/fragment_discover" />
     <fragment
-        android:id="@+id/viewMoreFragment"
-        android:name="com.kishore.tmdbapp.ui.dashboard.fragment.ViewMoreFragment"
-        android:label="fragment_view_more"
-        tools:layout="@layout/fragment_view_more">
-        <argument
-            android:name="categoryType"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_viewMoreFragment_to_viewDetailsFragment"
-            app:destination="@id/viewDetailsFragment" />
-    </fragment>
+        android:id="@+id/tvMenu"
+        android:name="com.kishore.tmdbapp.ui.dashboard.fragment.TelevisionFragment"
+        tools:layout="@layout/fragment_television" />
+    <fragment
+        android:id="@+id/watchListMenu"
+        android:name="com.kishore.tmdbapp.ui.dashboard.fragment.WatchListFragment"
+        tools:layout="@layout/fragment_watch_list" />
+    <fragment
+        android:id="@+id/profileMenu"
+        android:name="com.kishore.tmdbapp.ui.dashboard.fragment.ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
+
 </navigation>

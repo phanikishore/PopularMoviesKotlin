@@ -6,7 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.kishore.tmdbapp.databinding.ActivitySplashScreenBinding
-import com.kishore.tmdbapp.ui.dashboard.DashBoardActivity
+import com.kishore.tmdbapp.ui.home.HomeActivity
 import kotlinx.serialization.ExperimentalSerializationApi
 
 @ExperimentalSerializationApi
@@ -20,7 +20,7 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(binding.root)
         handler = Handler(Looper.getMainLooper())
         handler.postDelayed({
-            startActivity(Intent(this, DashBoardActivity::class.java))
+            startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }, 5000)
     }
