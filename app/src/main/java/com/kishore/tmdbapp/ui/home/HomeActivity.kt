@@ -1,22 +1,21 @@
-package com.kishore.tmdbapp.ui.dashboard
+package com.kishore.tmdbapp.ui.home
 
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import com.kishore.tmdbapp.R
-import com.kishore.tmdbapp.databinding.ActivityDashboardBinding
-import com.kishore.tmdbapp.databinding.ToolbarMainBinding
+import com.kishore.tmdbapp.databinding.ActivityHomeBinding
 import com.kishore.tmdbapp.ui.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.ExperimentalSerializationApi
 
 @ExperimentalSerializationApi
 @AndroidEntryPoint
-class DashBoardActivity : BaseActivity() {
-    val mTAG: String = DashBoardActivity::class.java.simpleName
-    private lateinit var binding: ActivityDashboardBinding
+class HomeActivity : BaseActivity() {
+    val mTAG: String = HomeActivity::class.java.simpleName
+    private lateinit var binding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDashboardBinding.inflate(layoutInflater)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 

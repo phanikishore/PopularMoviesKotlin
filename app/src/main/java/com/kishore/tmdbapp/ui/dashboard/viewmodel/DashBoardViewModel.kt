@@ -67,12 +67,4 @@ class DashBoardViewModel @Inject constructor(val repository: TmdbRepository) : V
             }
         }
     }
-
-    fun fetchRouteResponse() {
-        viewModelScope.launch {
-            repository.fetchRouteResponse().let {
-                println(it.toString())
-            }
-        }
-    }
 }

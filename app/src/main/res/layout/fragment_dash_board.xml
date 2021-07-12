@@ -6,25 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.fragment.DashBoardFragment">
 
-    <include
-        android:id="@+id/toolbarMainInclude"
-        layout="@layout/toolbar_main"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarMainInclude">
-
         <com.kishore.tmdbapp.ui.widget.CategoryView
             android:id="@+id/popularMovies"
             android:layout_width="match_parent"
@@ -44,5 +25,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/popularMovies" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.kishore.tmdbapp.ui.widget.CategoryView
+            android:id="@+id/tvshows"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:categoryName="TV Shows"
+            app:categoryTextSize="8sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/topMovies" />
 </androidx.constraintlayout.widget.ConstraintLayout>

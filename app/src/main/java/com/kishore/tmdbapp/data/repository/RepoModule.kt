@@ -5,6 +5,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import com.kishore.tmdbapp.BuildConfig
 import com.kishore.tmdbapp.data.network.TmdbApi
 import com.kishore.tmdbapp.utils.isNetworkAvailable
+import com.skydoves.sandwich.coroutines.CoroutinesResponseCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,6 +48,7 @@ object DataModule {
             .baseUrl(BuildConfig.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(Json.asConverterFactory(mediaType))
+            //.addCallAdapterFactory(CoroutinesResponseCallAdapterFactory())
             .build()
     }
 

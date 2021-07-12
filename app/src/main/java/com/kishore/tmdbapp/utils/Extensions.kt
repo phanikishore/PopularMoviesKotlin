@@ -6,6 +6,8 @@ import android.net.NetworkCapabilities
 import androidx.appcompat.widget.AppCompatImageView
 import com.bumptech.glide.Glide
 
+fun String.prefixUrl(url:String) = String.format(url,this)
+
 fun AppCompatImageView.loadUrl(url:String){
     Glide.with(this.context).load(url).into(this)
 }
